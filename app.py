@@ -39,12 +39,12 @@ st.markdown("""
       color: #fff;
       margin-bottom: 8px;
   }
-  .metric-label { font-size: 10px; letter-spacing: 2px; opacity: 0.8; }
-  .metric-value { font-size: 32px; font-weight: bold; line-height: 1.1; }
-  .metric-sub   { font-size: 11px; opacity: 0.8; }
+  .metric-label { font-size: 10px; letter-spacing: 2px; color: rgba(255,255,255,0.92); }
+  .metric-value { font-size: 32px; font-weight: bold; line-height: 1.1; color: #fff; }
+  .metric-sub   { font-size: 11px; color: rgba(255,255,255,0.85); }
 
   /* Stats table */
-  .stats-label { font-size: 11px; color: #8b6f3f; }
+  .stats-label { font-size: 11px; color: #6b4f2a; font-weight: 600; }
   .stats-value { font-size: 18px; }
   .stats-value-bold { font-size: 18px; font-weight: bold; }
 
@@ -228,7 +228,7 @@ def build_histogram(results, num_bins=30):
 
 
 def week_to_month(week):
-    d = datetime.date(2024, 1, 1) + datetime.timedelta(weeks=week - 1)
+    d = datetime.date(2024, 1, 1) + datetime.timedelta(weeks=int(week) - 1)
     return d.strftime("%b")
 
 
@@ -305,25 +305,25 @@ st.markdown("""
 
 u1, u2, u3, u4, u5 = st.columns(5)
 with u1:
-    st.markdown('<span style="font-size:10px;color:#8b7a5f;">S/U ± (%)</span>', unsafe_allow_html=True)
+    st.markdown('<span style="font-size:10px;font-weight:600;color:#4a3820;letter-spacing:1px;">S/U ± (%)</span>', unsafe_allow_html=True)
     su_uncertainty = st.slider("suu", 0.0, 4.0, 1.5, step=0.1, label_visibility="collapsed")
-    st.markdown(f'<div style="font-size:12px;color:#2a2419;">±{su_uncertainty:.1f}</div>', unsafe_allow_html=True)
+    st.markdown(f'<div style="font-size:13px;font-weight:bold;color:#2a2419;">±{su_uncertainty:.1f}</div>', unsafe_allow_html=True)
 with u2:
-    st.markdown('<span style="font-size:10px;color:#8b7a5f;">Weather ±</span>', unsafe_allow_html=True)
+    st.markdown('<span style="font-size:10px;font-weight:600;color:#4a3820;letter-spacing:1px;">Weather ±</span>', unsafe_allow_html=True)
     weather_uncertainty = st.slider("wu", 0.0, 5.0, 2.0, step=0.1, label_visibility="collapsed")
-    st.markdown(f'<div style="font-size:12px;color:#2a2419;">±{weather_uncertainty:.1f}</div>', unsafe_allow_html=True)
+    st.markdown(f'<div style="font-size:13px;font-weight:bold;color:#2a2419;">±{weather_uncertainty:.1f}</div>', unsafe_allow_html=True)
 with u3:
-    st.markdown('<span style="font-size:10px;color:#8b7a5f;">COT ±</span>', unsafe_allow_html=True)
+    st.markdown('<span style="font-size:10px;font-weight:600;color:#4a3820;letter-spacing:1px;">COT ±</span>', unsafe_allow_html=True)
     cot_uncertainty = st.slider("cu", 0.0, 3.0, 1.5, step=0.1, label_visibility="collapsed")
-    st.markdown(f'<div style="font-size:12px;color:#2a2419;">±{cot_uncertainty:.1f}</div>', unsafe_allow_html=True)
+    st.markdown(f'<div style="font-size:13px;font-weight:bold;color:#2a2419;">±{cot_uncertainty:.1f}</div>', unsafe_allow_html=True)
 with u4:
-    st.markdown('<span style="font-size:10px;color:#8b7a5f;">Price noise ×</span>', unsafe_allow_html=True)
+    st.markdown('<span style="font-size:10px;font-weight:600;color:#4a3820;letter-spacing:1px;">Price noise ×</span>', unsafe_allow_html=True)
     price_noise = st.slider("pn", 0.5, 2.5, 1.0, step=0.1, label_visibility="collapsed")
-    st.markdown(f'<div style="font-size:12px;color:#2a2419;">{price_noise:.1f}×</div>', unsafe_allow_html=True)
+    st.markdown(f'<div style="font-size:13px;font-weight:bold;color:#2a2419;">{price_noise:.1f}×</div>', unsafe_allow_html=True)
 with u5:
-    st.markdown('<span style="font-size:10px;color:#8b7a5f;">Simulations</span>', unsafe_allow_html=True)
+    st.markdown('<span style="font-size:10px;font-weight:600;color:#4a3820;letter-spacing:1px;">Simulations</span>', unsafe_allow_html=True)
     num_sims = st.slider("ns", 1000, 15000, 5000, step=1000, label_visibility="collapsed")
-    st.markdown(f'<div style="font-size:12px;color:#2a2419;">{num_sims:,}</div>', unsafe_allow_html=True)
+    st.markdown(f'<div style="font-size:13px;font-weight:bold;color:#2a2419;">{num_sims:,}</div>', unsafe_allow_html=True)
 
 st.markdown("<div style='margin-bottom:12px;'></div>", unsafe_allow_html=True)
 
@@ -395,7 +395,7 @@ st.markdown(f"""
     <div class="metric-sub">95% worst case</div>
   </div>
 </div>
-<div style="font-size:13px;color:#6b5a3f;margin-bottom:24px;">
+<div style="font-size:13px;color:#4a3820;margin-bottom:24px;">
   {num_sims:,} simulations · Correlated factor uncertainty · Full probability distributions
 </div>
 """, unsafe_allow_html=True)
@@ -407,7 +407,7 @@ st.markdown("""
   <h2 style="font-size:20px;margin:0 0 4px 0;font-weight:normal;font-family:Georgia,serif;color:#2a2419;">
     Monte Carlo price fan
   </h2>
-  <div style="font-size:12px;color:#6b5a3f;margin-bottom:4px;">
+  <div style="font-size:12px;color:#4a3820;margin-bottom:4px;">
     Inner band: 25th–75th percentile · Outer band: 5th–95th percentile · Line: median path
   </div>
 </div>
@@ -437,7 +437,7 @@ fig_fan.add_hline(y=price_target, line=dict(color="#3a7c4e", dash="dash", width=
                   annotation_text="Target", annotation_font_color="#3a7c4e",
                   annotation_position="right")
 
-tick_vals = sorted({fan_df["week"].iloc[0]} | {w for w in fan_df["week"] if w % 8 == 0})
+tick_vals = sorted(set([int(fan_df["week"].iloc[0])] + [int(w) for w in fan_df["week"] if w % 8 == 0]))
 tick_text = [week_to_month(w) for w in tick_vals]
 fig_fan.update_layout(
     xaxis=dict(tickvals=tick_vals, ticktext=tick_text, showgrid=True, gridcolor="#d4c4a0"),
@@ -446,7 +446,7 @@ fig_fan.update_layout(
     legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="right", x=1,
                 font=dict(family="Georgia, serif", size=12)),
     height=400, margin=dict(l=60, r=100, t=10, b=40),
-    font=dict(family="Georgia, serif", color="#6b5a3f"),
+    font=dict(family="Georgia, serif", color="#3a2a14"),
 )
 st.plotly_chart(fig_fan, use_container_width=True)
 st.markdown("<div style='margin-bottom:24px;'></div>", unsafe_allow_html=True)
@@ -458,9 +458,9 @@ st.markdown(f"""
   <h2 style="font-size:20px;margin:0 0 4px 0;font-weight:normal;font-family:Georgia,serif;color:#2a2419;">
     Terminal price distribution at {week_to_month(horizon_week)}
   </h2>
-  <div style="font-size:12px;color:#6b5a3f;margin-bottom:4px;">
+  <div style="font-size:12px;color:#4a3820;margin-bottom:4px;">
     <span style="color:#c0392b;">Red: below current ${current_price:.2f}</span> ·
-    <span style="color:#8b6f3f;">Brown: between</span> ·
+    <span style="color:#7a5230;">Brown: between</span> ·
     <span style="color:#3a7c4e;">Green: above target ${price_target:.2f}</span>
   </div>
 </div>
@@ -487,7 +487,7 @@ if not histogram.empty:
         paper_bgcolor="#ffffff", plot_bgcolor="#ffffff",
         height=300, margin=dict(l=60, r=40, t=10, b=40),
         showlegend=False, bargap=0.05,
-        font=dict(family="Georgia, serif", color="#6b5a3f"),
+        font=dict(family="Georgia, serif", color="#3a2a14"),
     )
     st.plotly_chart(fig_hist, use_container_width=True)
 
@@ -500,7 +500,7 @@ skew = ("Right" if stats["mean"] > stats["p50"] else
 
 st.markdown(f"""
 <div style="background:#fff;border:1px solid #c4a76a;padding:20px;margin-bottom:24px;">
-  <div style="font-size:14px;letter-spacing:2px;color:#8b6f3f;margin-bottom:16px;font-weight:normal;font-family:Georgia,serif;">
+  <div style="font-size:14px;letter-spacing:2px;color:#6b4f2a;margin-bottom:16px;font-weight:600;font-family:Georgia,serif;">
     DISTRIBUTION STATISTICS
   </div>
   <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px;font-size:14px;font-family:Georgia,serif;">
@@ -554,7 +554,7 @@ st.markdown(f"""
 
 # ── FOOTER ──
 st.markdown("""
-<div style="padding:16px;background:#ede4d3;font-size:12px;color:#6b5a3f;line-height:1.6;font-family:Georgia,serif;">
+<div style="padding:16px;background:#ede4d3;font-size:12px;color:#3a2a14;line-height:1.6;font-family:Georgia,serif;">
   <strong>Model complete.</strong> You now have a full framework: seasonality (base rate) →
   fundamentals (S/U regime) → weather (conditional stress) → positioning (contrarian filter) →
   Monte Carlo (probabilistic outcomes with correlated factor uncertainty).<br><br>
