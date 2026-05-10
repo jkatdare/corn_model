@@ -50,6 +50,29 @@ st.markdown("""
 
   /* Tighten slider spacing */
   .stSlider { margin-top: -6px !important; margin-bottom: 0 !important; }
+
+  /* Override Streamlit's default yellow/orange slider to brown theme */
+  [data-testid="stSlider"] [data-baseweb="slider"] [data-testid="stTickBarMin"],
+  [data-testid="stSlider"] [data-baseweb="slider"] [data-testid="stTickBarMax"] {
+      color: #8b6f3f !important;
+  }
+  /* Filled track (left of thumb) */
+  [data-testid="stSlider"] [data-baseweb="slider"] div[role="slider"] ~ div,
+  [data-testid="stSlider"] [data-baseweb="slider"] div[class*="Track"] {
+      background: #8b6f3f !important;
+  }
+  /* Thumb */
+  [data-testid="stSlider"] [data-baseweb="slider"] div[role="slider"] {
+      background: #6b4f2a !important;
+      border-color: #6b4f2a !important;
+  }
+  /* Active/filled portion of track */
+  [data-testid="stSlider"] [data-baseweb="slider"] [class*="sliderInnerTrack"] {
+      background: #8b6f3f !important;
+  }
+  div[data-baseweb="slider"] div[class*="Track"] > div:first-child {
+      background: #8b6f3f !important;
+  }
   .stNumberInput { margin-top: -6px !important; }
 </style>
 """, unsafe_allow_html=True)
@@ -548,27 +571,5 @@ st.markdown(f"""
   (a {var_pct:.0f}% move), the edge-adjusted position size is modest.
   Real Kelly: size at {kelly:.0f}% of max — and half-Kelly in practice.<br><br>
   {signal}
-</div>
-""", unsafe_allow_html=True)
-
-
-# ── FOOTER ──
-st.markdown("""
-<div style="padding:16px;background:#ede4d3;font-size:12px;color:#3a2a14;line-height:1.6;font-family:Georgia,serif;">
-  <strong>Model complete.</strong> You now have a full framework: seasonality (base rate) →
-  fundamentals (S/U regime) → weather (conditional stress) → positioning (contrarian filter) →
-  Monte Carlo (probabilistic outcomes with correlated factor uncertainty).<br><br>
-  <strong>What to do with it in practice:</strong> Use the probability outputs to size trades,
-  not to pick direction alone. A 65% probability of $5.50 with $4.65 current price, at modest
-  uncertainty, is a reasonable long. A 65% probability with huge uncertainty bands (wide histogram)
-  is not — the expected value is the same but the volatility-adjusted return is worse.<br><br>
-  <strong>What's still missing for production:</strong> (1) Real data pipelines (USDA, NOAA, CFTC, CME),
-  (2) backtesting framework to validate factor weights against actual P&amp;L,
-  (3) ensemble with non-seasonal regime detection (spec bubbles, macro shocks),
-  (4) transaction cost and margin modeling,
-  (5) multi-contract portfolio logic (crush spreads, inter-month spreads).<br><br>
-  <em>Not financial advice. All parameters are illustrative. Monte Carlo outputs look precise but are
-  only as good as the input assumptions — garbage in, garbage out. Always backtest against
-  out-of-sample data before risking capital.</em>
 </div>
 """, unsafe_allow_html=True)
