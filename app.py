@@ -463,13 +463,13 @@ fig_fan.add_hline(y=price_target, line=dict(color="#3a7c4e", dash="dash", width=
 tick_vals = sorted(set([int(fan_df["week"].iloc[0])] + [int(w) for w in fan_df["week"] if w % 8 == 0]))
 tick_text = [week_to_month(w) for w in tick_vals]
 fig_fan.update_layout(
-    xaxis=dict(tickvals=tick_vals, ticktext=tick_text, showgrid=True, gridcolor="#d4c4a0"),
-    yaxis=dict(tickformat="$.2f", showgrid=True, gridcolor="#d4c4a0"),
+    xaxis=dict(tickvals=tick_vals, ticktext=tick_text, showgrid=True, gridcolor="#c8b48a", tickfont=dict(color="#1a1008", size=12)),
+    yaxis=dict(tickformat="$.2f", showgrid=True, gridcolor="#c8b48a", tickfont=dict(color="#1a1008", size=12)),
     paper_bgcolor="#ffffff", plot_bgcolor="#ffffff",
     legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="right", x=1,
                 font=dict(family="Georgia, serif", size=12)),
     height=400, margin=dict(l=60, r=100, t=10, b=40),
-    font=dict(family="Georgia, serif", color="#3a2a14"),
+    font=dict(family="Georgia, serif", color="#1a1008"),
 )
 st.plotly_chart(fig_fan, use_container_width=True)
 st.markdown("<div style='margin-bottom:24px;'></div>", unsafe_allow_html=True)
@@ -505,12 +505,12 @@ if not histogram.empty:
     fig_hist.add_vline(x=price_target,  line=dict(color="#3a7c4e", dash="dash", width=1.5))
     fig_hist.add_vline(x=stats["mean"], line=dict(color="#2a2419", dash="dot",  width=1.5))
     fig_hist.update_layout(
-        xaxis=dict(tickformat="$.2f", showgrid=True, gridcolor="#d4c4a0"),
-        yaxis=dict(tickformat=".1f",  showgrid=True, gridcolor="#d4c4a0"),
+        xaxis=dict(tickformat="$.2f", showgrid=True, gridcolor="#c8b48a", tickfont=dict(color="#1a1008", size=12)),
+        yaxis=dict(tickformat=".1f",  showgrid=True, gridcolor="#c8b48a", tickfont=dict(color="#1a1008", size=12)),
         paper_bgcolor="#ffffff", plot_bgcolor="#ffffff",
         height=300, margin=dict(l=60, r=40, t=10, b=40),
         showlegend=False, bargap=0.05,
-        font=dict(family="Georgia, serif", color="#3a2a14"),
+        font=dict(family="Georgia, serif", color="#1a1008"),
     )
     st.plotly_chart(fig_hist, use_container_width=True)
 
